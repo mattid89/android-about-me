@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
+import com.mgd.aboutme.classes.MyName
 import com.mgd.aboutme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,11 +16,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val myName: MyName = MyName("Matías Doto")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        binding.myName = myName
         // obtengo las referencias de las views -> no necesito hacer esto -> el uso del binding lo reemplaza
         // nicknameEditText = findViewById<EditText>(R.id.nickname_edit)
         // nicknameTextView = findViewById<TextView>(R.id.nickname_text)
@@ -42,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         // nicknameTextView.visibility = View.VISIBLE
 
         binding.apply {
-            nicknameText.text = binding.nicknameEdit.text
+//            nicknameText.text = binding.nicknameEdit.text
+            myName?.nickname = nicknameEdit.text.toString()
             nicknameText.visibility = View.VISIBLE
             nicknameEdit.visibility = View.GONE
             invalidateAll()
